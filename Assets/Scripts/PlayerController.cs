@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HealthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Image>();
+        HealthBar.fillAmount = 1;
         GameNetworkManager = FindObjectOfType<GameNetworkManager>();
         Rigidbody.velocity = Vector3.zero;
         if (!photonView.IsMine)
@@ -101,12 +102,14 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage()
     {
-        photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.Others);
+        photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All);
     }
 
     [PunRPC]
     public void RPC_TakeDamage()
     {
+        if (!photonView.IsMine)
+            return;
         if (HealthBar.fillAmount <= 0)
         {
             Die();
@@ -129,8 +132,14 @@ public class PlayerController : MonoBehaviour
         LazerBeam.enabled = true;
         WeaponHolder.ChosedWeapon.GetComponent<Rifle>().Invoke("LazerOff",0.2f);
     }
-    public void Die()
+    public void Die() //эта дичь странно работает
     {
-        int i = Random.Range(0, 6);
+        /*int i = Random.Range(0, GameNetworkManager.Spawnpoints.Length);
+        transform.position = GameNetworkManager.Spawnpoints[i].transform.position;
+        HealthBar.fillAmount = 1;*/
+        GameNetworkManager.SpawningPlayer();
+        /*PhotonNetwork.Instantiate(GameNetworkManager.PlayerPrefab.name, GameNetworkManager.Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { photonView.ViewID });
+        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);*/
     }
 }

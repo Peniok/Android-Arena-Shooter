@@ -10,8 +10,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.NickName = "Player" + Random.Range(1000, 9999);
-        Log("Player`s name is set to " + PhotonNetwork.NickName);
+        PhotonNetwork.NickName = "PlayerPrefab" + Random.Range(1000, 9999);
+        Log("PlayerPrefab`s name is set to " + PhotonNetwork.NickName);
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.ConnectUsingSettings();

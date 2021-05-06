@@ -5,13 +5,24 @@ using Photon.Realtime;
 
 public class GameNetworkManager : MonoBehaviourPunCallbacks
 {
-    public GameObject Player;
+    public GameObject PlayerPrefab, Player;
     public GameObject[] Spawnpoints;
     // Start is called before the first frame update
     void Start()
     {
-        int i = Random.Range(0, 6);
-        PhotonNetwork.Instantiate(Player.name,Spawnpoints[i].transform.position,Quaternion.identity);
+        int i = Random.Range(0, Spawnpoints.Length);
+        Player = PhotonNetwork.Instantiate(PlayerPrefab.name, Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { PlayerPrefab.GetComponent<PlayerController>().photonView.ViewID });
+        /*
+        int i = Random.Range(0, Spawnpoints.Length);
+        PhotonNetwork.Instantiate(PlayerPrefab.name,Spawnpoints[i].transform.position,Quaternion.identity);
+        */
+    }
+    public void SpawningPlayer()
+    {
+        int i = Random.Range(0, Spawnpoints.Length);
+        PhotonNetwork.Destroy(Player);
+        Player = PhotonNetwork.Instantiate(PlayerPrefab.name, Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { Player.GetComponent<PlayerController>().photonView.ViewID });
+
     }
     public void Leave()
     {
@@ -23,10 +34,10 @@ public class GameNetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.LogFormat("Player (0) entered room", newPlayer.NickName);
+        Debug.LogFormat("PlayerPrefab (0) entered room", newPlayer.NickName);
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        Debug.LogFormat("Player (0) left room", otherPlayer.NickName);
+        Debug.LogFormat("PlayerPrefab (0) left room", otherPlayer.NickName);
     }
 }

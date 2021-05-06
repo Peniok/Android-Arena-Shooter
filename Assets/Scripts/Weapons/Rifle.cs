@@ -11,7 +11,7 @@ public class Rifle : Gun
     // Start is called before the first frame update
     /*public override void Shot()
     {
-        transform.parent.GetComponent<WeaponControl>().Player.GetComponent<PlayerController>().photonView.RPC(nameof(RPC_Shot), RpcTarget.All);
+        transform.parent.GetComponent<WeaponControl>().PlayerPrefab.GetComponent<PlayerController>().photonView.RPC(nameof(RPC_Shot), RpcTarget.All);
     }
     [PunRPC]*/
     public override void Shot()
@@ -32,7 +32,8 @@ public class Rifle : Gun
                 PlayerScript.DrawShotLine(1, hit.point);
                 if(hit.collider.gameObject.GetComponent<PlayerController>() != null)
                 {
-                    PlayerScript.TakeDamage();
+                    hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
+                    //PlayerScript.TakeDamage();
                 }
                 Debug.Log("We hit" + hit.collider.name);
             }
