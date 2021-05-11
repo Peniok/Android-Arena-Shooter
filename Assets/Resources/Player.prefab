@@ -1145,7 +1145,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Leave
+
+'
 --- !u!1 &7045710670332906448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1355,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Jump
 --- !u!1 &7758765915442401216
 GameObject:
   m_ObjectHideFlags: 0
