@@ -21,6 +21,8 @@ public class PlayerGroundChecker : MonoBehaviour
 			return;
 
 		playerController.IsGrounded = false;
+
+		//playerController.JumpCounter = 1;
 	}
 
 	/*void OnTriggerStay(Collider other)

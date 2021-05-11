@@ -39,8 +39,8 @@ public class Rifle : Gun
             }
             else
             {
-                LazerBeam.SetPosition(1, new Vector3(4,-7,40));
-                PlayerScript.DrawShotLine(1, new Vector3(4, -7, 40));
+                LazerBeam.SetPosition(1, new Vector3(580,-4547, 40));
+                PlayerScript.DrawShotLine(1, new Vector3(580, -4547, 40));
             }
         }
     }

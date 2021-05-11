@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!photonView.IsMine) return;
         ShotAndAim();
-        Look(AimField, 2);
+        Look(AimField, 1);
         Move();
         Rigidbody.MovePosition(Rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime*5);
     }
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (ShootField.Pressed == true)
         {
             WeaponHolder.Use();
-            Look(ShootField, 1);
+            Look(ShootField, 0.5f);
         }
 
     }
@@ -128,7 +128,14 @@ public class PlayerController : MonoBehaviour
         if (photonView.IsMine)
             return;
         LineRenderer  LazerBeam = WeaponHolder.ChosedWeapon.GetComponent<Rifle>().LazerBeam;
-        LazerBeam.SetPosition(NumderOfPoint, LazerBeam.transform.InverseTransformPoint(PositionOfPoint));
+        if (PositionOfPoint == new Vector3(580, -4547, 40))
+        {
+            LazerBeam.SetPosition(NumderOfPoint, PositionOfPoint);
+        }
+        else
+        {
+            LazerBeam.SetPosition(NumderOfPoint, LazerBeam.transform.InverseTransformPoint(PositionOfPoint));
+        }
         LazerBeam.enabled = true;
         WeaponHolder.ChosedWeapon.GetComponent<Rifle>().Invoke("LazerOff",0.2f);
     }

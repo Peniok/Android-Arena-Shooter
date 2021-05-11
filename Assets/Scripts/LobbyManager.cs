@@ -40,6 +40,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Log("Joined to Room");
 
-        PhotonNetwork.LoadLevel("Game");
+        PhotonNetwork.LoadLevel(/*"outpost on desert 1"*/"Game");
     }
 }
