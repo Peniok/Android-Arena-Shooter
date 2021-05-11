@@ -1,5 +1,4 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Rifle : Gun
 {
@@ -8,18 +7,12 @@ public class Rifle : Gun
     public LineRenderer LazerBeam;
     public bool reloaded = true;
     [SerializeField] PlayerController PlayerScript;
-    // Start is called before the first frame update
-    /*public override void Shot()
-    {
-        transform.parent.GetComponent<WeaponControl>().PlayerPrefab.GetComponent<PlayerController>().photonView.RPC(nameof(RPC_Shot), RpcTarget.All);
-    }
-    [PunRPC]*/
     public override void Shot()
     {
         if (reloaded == true)
         {
             LazerBeam.enabled = true;
-            Ray ray = PlayerCam.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2)/*new Vector3(0.5f, 0, 0.5f)*/);
+            Ray ray = PlayerCam.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2));
             //ray.origin = PlayerCam.transform.position;
             LazerBeam.SetPosition(0, Vector3.zero);
             Invoke("LazerOff", 0.2f);
@@ -33,7 +26,6 @@ public class Rifle : Gun
                 if(hit.collider.gameObject.GetComponent<PlayerController>() != null)
                 {
                     hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
-                    //PlayerScript.TakeDamage();
                 }
                 Debug.Log("We hit" + hit.collider.name);
             }

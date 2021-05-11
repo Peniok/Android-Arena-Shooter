@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -24,7 +22,7 @@ public class TouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (Pressed)
         {
-            if(PointerId >= 0 && PointerId < Input.touches.Length)//на компене работает, но на телефоне да
+            if(PointerId >= 0 && PointerId < Input.touches.Length)//on PC Doesn`t work, only on telephone
             {
                 TouchDistance = Input.touches[PointerId].position - PointerOld;
                 PointerOld = Input.touches[PointerId].position;

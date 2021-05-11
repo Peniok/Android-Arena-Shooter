@@ -7,15 +7,10 @@ public class GameNetworkManager : MonoBehaviourPunCallbacks
 {
     public GameObject PlayerPrefab, Player;
     public GameObject[] Spawnpoints;
-    // Start is called before the first frame update
     void Start()
     {
         int i = Random.Range(0, Spawnpoints.Length);
         Player = PhotonNetwork.Instantiate(PlayerPrefab.name, Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { PlayerPrefab.GetComponent<PlayerController>().photonView.ViewID });
-        /*
-        int i = Random.Range(0, Spawnpoints.Length);
-        PhotonNetwork.Instantiate(PlayerPrefab.name,Spawnpoints[i].transform.position,Quaternion.identity);
-        */
     }
     public void SpawningPlayer()
     {
