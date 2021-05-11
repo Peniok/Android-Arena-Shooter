@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded;
     Vector3 smoothMoveVelocity;
     Vector3 moveAmount;
+    // Start is called before the first frame update
     void Start()
     {
         HealthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Image>();
@@ -74,8 +75,9 @@ public class PlayerController : MonoBehaviour
     }
     void Look(TouchField AimerOrShooter, float LookMultiplier)
     {
+        //transform.Rotate(Vector3.up * Aimer.Horizontal* LookMultiplier);
         Rigidbody.MoveRotation(Rigidbody.rotation * Quaternion.Euler(new Vector3(0, AimerOrShooter.TouchDistance.x*LookMultiplier, 0)));
-        verticalLookRotation += AimerOrShooter.TouchDistance.y* LookMultiplier;
+        verticalLookRotation += AimerOrShooter.TouchDistance.y* LookMultiplier;//Aimer.Vertical;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
         PlayerCamera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
@@ -137,8 +139,14 @@ public class PlayerController : MonoBehaviour
         LazerBeam.enabled = true;
         WeaponHolder.ChosedWeapon.GetComponent<Rifle>().Invoke("LazerOff",0.2f);
     }
-    public void Die() 
+    public void Die() //эта дичь странно работает
     {
+        /*int i = Random.Range(0, GameNetworkManager.Spawnpoints.Length);
+        transform.position = GameNetworkManager.Spawnpoints[i].transform.position;
+        HealthBar.fillAmount = 1;*/
         GameNetworkManager.SpawningPlayer();
+        /*PhotonNetwork.Instantiate(GameNetworkManager.PlayerPrefab.name, GameNetworkManager.Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { photonView.ViewID });
+        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);*/
     }
 }

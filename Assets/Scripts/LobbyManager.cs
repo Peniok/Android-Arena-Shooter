@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public Text LogText;
+    // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.NickName = "PlayerPrefab" + Random.Range(1000, 9999);
@@ -24,6 +27,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Log("Connected to Master");
     }
+    // Update is called once per frame
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(null, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
@@ -36,6 +40,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Log("Joined to Room");
 
-        PhotonNetwork.LoadLevel("Game");
+        PhotonNetwork.LoadLevel(/*"outpost on desert 1"*/"Game");
     }
 }

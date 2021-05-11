@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerGroundChecker : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class PlayerGroundChecker : MonoBehaviour
 			return;
 
 		playerController.IsGrounded = false;
+
+		//playerController.JumpCounter = 1;
 	}
 
 	/*void OnTriggerStay(Collider other)
