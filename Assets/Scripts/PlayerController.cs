@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         //transform.Rotate(Vector3.up * Aimer.Horizontal* LookMultiplier);
         Rigidbody.MoveRotation(Rigidbody.rotation * Quaternion.Euler(new Vector3(0, AimerOrShooter.TouchDistance.x*LookMultiplier, 0)));
-        verticalLookRotation += AimerOrShooter.TouchDistance.y;//Aimer.Vertical;
+        verticalLookRotation += AimerOrShooter.TouchDistance.y* LookMultiplier;//Aimer.Vertical;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
         PlayerCamera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
