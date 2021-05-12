@@ -8,12 +8,6 @@ public class Rifle : Gun
     public LineRenderer LazerBeam;
     public bool reloaded = true;
     [SerializeField] PlayerController PlayerScript;
-    // Start is called before the first frame update
-    /*public override void Shot()
-    {
-        transform.parent.GetComponent<WeaponControl>().PlayerPrefab.GetComponent<PlayerController>().photonView.RPC(nameof(RPC_Shot), RpcTarget.All);
-    }
-    [PunRPC]*/
     public override void Shot()
     {
         if (reloaded == true)
@@ -48,7 +42,7 @@ public class Rifle : Gun
     {
         LazerBeam.enabled = false;
     }
-    public void Reload()
+    public override void Reload()
     {
         reloaded = true;
     } 

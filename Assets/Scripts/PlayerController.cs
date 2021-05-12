@@ -139,14 +139,8 @@ public class PlayerController : MonoBehaviour
         LazerBeam.enabled = true;
         WeaponHolder.ChosedWeapon.GetComponent<Rifle>().Invoke("LazerOff",0.2f);
     }
-    public void Die() //эта дичь странно работает
+    public void Die()
     {
-        /*int i = Random.Range(0, GameNetworkManager.Spawnpoints.Length);
-        transform.position = GameNetworkManager.Spawnpoints[i].transform.position;
-        HealthBar.fillAmount = 1;*/
         GameNetworkManager.SpawningPlayer();
-        /*PhotonNetwork.Instantiate(GameNetworkManager.PlayerPrefab.name, GameNetworkManager.Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { photonView.ViewID });
-        PhotonNetwork.Destroy(gameObject);
-        Destroy(gameObject);*/
     }
 }

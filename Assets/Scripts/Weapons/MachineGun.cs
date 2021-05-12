@@ -5,14 +5,12 @@ using UnityEngine;
 public class MachineGun : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    /*void Shoot()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        if ()
+        {
+            RaycastHit hit;
+            if(Physics.Raycast())
+        }
+    }*/
 }
