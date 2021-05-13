@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             WeaponHolder.ChosedWeapon.GetComponent<Gun>().EffectOfShooting.GetComponent<ParticleSystem>().Stop();
             WeaponHolder.ChosedWeapon.GetComponent<MachineGun>().WorkingParticleSystem = false;
+            ShowMachineGunShooting(false);
         }
         
 
@@ -144,6 +145,24 @@ public class PlayerController : MonoBehaviour
         }
         LazerBeam.enabled = true;
         WeaponHolder.Weapons[0].GetComponent<Rifle>().Invoke("LazerOff",0.2f);
+    }
+    public void ShowMachineGunShooting(bool Shooting)
+    {
+        photonView.RPC(nameof(RPC_ShowMachineGunShooting), RpcTarget.All, Shooting);
+    }
+    [PunRPC]
+    public void RPC_ShowMachineGunShooting(bool Shooting)
+    {
+        if (photonView.IsMine)
+            return;
+        if (Shooting == true)
+        {
+            WeaponHolder.Weapons[1].GetComponent<MachineGun>().flash.Play();
+        }
+        if (Shooting == false)
+        {
+            WeaponHolder.Weapons[1].GetComponent<MachineGun>().flash.Stop();
+        }
     }
     public void Die()
     {

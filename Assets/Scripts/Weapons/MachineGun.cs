@@ -12,6 +12,7 @@ public class MachineGun : Gun
             {
                 flash.Play();
                 WorkingParticleSystem = true;
+                PlayerScript.ShowMachineGunShooting(true);
             }
             nextfire = Time.time + 1f / fireRate;
             RaycastHit hit;
