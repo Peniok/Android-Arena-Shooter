@@ -17,9 +17,22 @@ public class WeaponControl : MonoBehaviour
     {
         
     }
+    public void TakeRifle()
+    {
+
+        Weapons[0].SetActive(true);
+        ChosedWeapon = Weapons[0];
+        Weapons[1].SetActive(false);
+    }
+    public void TakeMachineGun()
+    {
+        Weapons[1].SetActive(true);
+        ChosedWeapon = Weapons[1];
+        Weapons[0].SetActive(false);
+    }
     public void Use()
     {
-        ChosedWeapon.GetComponent<Gun>().Shot();
+        ChosedWeapon.GetComponent<Gun>().Shoot();
         //ChosedWeapon.GetComponent<Rifle>().Shot();
     }
 }

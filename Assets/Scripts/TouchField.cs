@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -15,7 +13,6 @@ public class TouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         PointerId = eventData.pointerId;
         PointerOld = eventData.position;
     }
-
     public void OnPointerUp(PointerEventData eventData)
     {
         Pressed = false;

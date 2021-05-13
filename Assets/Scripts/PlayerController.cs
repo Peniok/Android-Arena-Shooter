@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!photonView.IsMine) return;
         ShotAndAim();
-        Look(AimField, 1);
+        Look(AimField, 0.5f);
         Move();
         Rigidbody.MovePosition(Rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime*5);
     }
@@ -88,8 +88,14 @@ public class PlayerController : MonoBehaviour
         if (ShootField.Pressed == true)
         {
             WeaponHolder.Use();
-            Look(ShootField, 0.5f);
+            Look(ShootField, 0.25f);
         }
+        if(ShootField.Pressed == false && WeaponHolder.ChosedWeapon.GetComponent<Gun>().EffectOfShooting != null)
+        {
+            WeaponHolder.ChosedWeapon.GetComponent<Gun>().EffectOfShooting.GetComponent<ParticleSystem>().Stop();
+            WeaponHolder.ChosedWeapon.GetComponent<MachineGun>().WorkingParticleSystem = false;
+        }
+        
 
     }
     
@@ -100,13 +106,13 @@ public class PlayerController : MonoBehaviour
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir, ref smoothMoveVelocity, smoothTime);
     }
     
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All);
+        photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All, damage);
     }
 
     [PunRPC]
-    public void RPC_TakeDamage()
+    public void RPC_TakeDamage(float damage)
     {
         if (!photonView.IsMine)
             return;
@@ -114,7 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        HealthBar.fillAmount -= 0.34f;
+        HealthBar.fillAmount -= damage;
     }
 
     public void DrawShotLine(int NumderOfPoint, Vector3 PositionOfPoint)
@@ -127,7 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         if (photonView.IsMine)
             return;
-        LineRenderer  LazerBeam = WeaponHolder.ChosedWeapon.GetComponent<Rifle>().LazerBeam;
+        LineRenderer  LazerBeam = WeaponHolder.Weapons[0].GetComponent<Rifle>().LazerBeam;
         if (PositionOfPoint == new Vector3(580, -4547, 40))
         {
             LazerBeam.SetPosition(NumderOfPoint, PositionOfPoint);
@@ -137,7 +143,7 @@ public class PlayerController : MonoBehaviour
             LazerBeam.SetPosition(NumderOfPoint, LazerBeam.transform.InverseTransformPoint(PositionOfPoint));
         }
         LazerBeam.enabled = true;
-        WeaponHolder.ChosedWeapon.GetComponent<Rifle>().Invoke("LazerOff",0.2f);
+        WeaponHolder.Weapons[0].GetComponent<Rifle>().Invoke("LazerOff",0.2f);
     }
     public void Die()
     {

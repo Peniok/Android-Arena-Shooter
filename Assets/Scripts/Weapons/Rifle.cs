@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class Rifle : Gun
 {
-    [SerializeField] Camera PlayerCam;
-    [SerializeField] GameObject AimPoint, LazerBeamObj;
+    //[SerializeField] Camera PlayerCam;
+    [SerializeField] GameObject LazerBeamObj;
     public LineRenderer LazerBeam;
-    public bool reloaded = true;
-    [SerializeField] PlayerController PlayerScript;
-    public override void Shot()
+    //public bool reloaded = true;
+    public override void Shoot()
     {
         if (reloaded == true)
         {
@@ -26,7 +25,7 @@ public class Rifle : Gun
                 PlayerScript.DrawShotLine(1, hit.point);
                 if(hit.collider.gameObject.GetComponent<PlayerController>() != null)
                 {
-                    hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
+                    hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
                     //PlayerScript.TakeDamage();
                 }
                 Debug.Log("We hit" + hit.collider.name);
