@@ -8,6 +8,7 @@ public abstract class Gun : MonoBehaviour
     public bool reloaded;
     public GameObject EffectOfShooting;
     public PlayerController PlayerScript;
+    public AudioSource ShotAudio;
     public virtual void Shoot()
     {
 

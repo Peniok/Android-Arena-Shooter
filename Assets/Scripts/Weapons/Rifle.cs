@@ -11,6 +11,7 @@ public class Rifle : Gun
     {
         if (reloaded == true)
         {
+            ShotAudio.Play();
             LazerBeam.enabled = true;
             Ray ray = PlayerCam.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2)/*new Vector3(0.5f, 0, 0.5f)*/);
             //ray.origin = PlayerCam.transform.position;

@@ -14,6 +14,7 @@ public class MachineGun : Gun
                 WorkingParticleSystem = true;
                 PlayerScript.ShowMachineGunShooting(true);
             }
+            ShotAudio.Play();
             nextfire = Time.time + 1f / fireRate;
             RaycastHit hit;
             if (Physics.Raycast(PlayerCam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)), out hit))
