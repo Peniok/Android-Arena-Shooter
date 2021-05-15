@@ -15,12 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera PlayerCamera;
     public Canvas Canvas;
     [SerializeField] Image HealthBar;
-    //
     [SerializeField]float verticalLookRotation, smoothTime;
     public bool IsGrounded;
     Vector3 smoothMoveVelocity;
     Vector3 moveAmount;
-    // Start is called before the first frame update
     void Start()
     {
         HealthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Image>();
@@ -34,19 +32,14 @@ public class PlayerController : MonoBehaviour
             Destroy(Canvas.gameObject);
             Destroy(Rigidbody);
         }
-
-        Invoke("SpawnStabilize", 0.01f);
-        Invoke("SpawnStabilize", 0.3f);
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (!photonView.IsMine) return;
         ShotAndAim();
         Look(AimField, 0.5f);
         Move();
-        Rigidbody.MovePosition(Rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime*5);
+
     }
     public void OnButtonJumpDown()
     {
@@ -65,14 +58,6 @@ public class PlayerController : MonoBehaviour
     {
         GameNetworkManager.Leave();
     }
-    public void SpawnStabilize()
-    {
-        if (Rigidbody != null)
-        {
-            Rigidbody.velocity = Vector3.zero;
-            transform.position = new Vector3(transform.position.x, 3, transform.position.z);
-        }
-    }
     void Look(TouchField AimerOrShooter, float LookMultiplier)
     {
         //transform.Rotate(Vector3.up * Aimer.Horizontal* LookMultiplier);
@@ -84,7 +69,6 @@ public class PlayerController : MonoBehaviour
     }
     void ShotAndAim()
     {
-
         if (ShootField.Pressed == true)
         {
             WeaponHolder.Use();
@@ -96,15 +80,12 @@ public class PlayerController : MonoBehaviour
             WeaponHolder.ChosedWeapon.GetComponent<MachineGun>().WorkingParticleSystem = false;
             ShowMachineGunShooting(false);
         }
-        
-
     }
-    
     void Move()
     {
         Vector3 moveDir = new Vector3(Mover.Horizontal, 0, Mover.Vertical).normalized;
-
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir, ref smoothMoveVelocity, smoothTime);
+        Rigidbody.MovePosition(Rigidbody.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime * 5);
     }
     
     public void TakeDamage(float damage)

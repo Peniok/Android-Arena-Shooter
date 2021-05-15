@@ -12,10 +12,6 @@ public class GameNetworkManager : MonoBehaviourPunCallbacks
     {
         int i = Random.Range(0, Spawnpoints.Length);
         Player = PhotonNetwork.Instantiate(PlayerPrefab.name, Spawnpoints[i].transform.position, Quaternion.identity, 0, new object[] { PlayerPrefab.GetComponent<PlayerController>().photonView.ViewID });
-        /*
-        int i = Random.Range(0, Spawnpoints.Length);
-        PhotonNetwork.Instantiate(PlayerPrefab.name,Spawnpoints[i].transform.position,Quaternion.identity);
-        */
     }
     public void SpawningPlayer()
     {
@@ -28,7 +24,7 @@ public class GameNetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
     }
-    public override void OnLeftRoom()//Вызывается когда вышел из комнаты
+    public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
     }
