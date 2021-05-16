@@ -16,8 +16,8 @@ public class Rifle : Gun
             Ray ray = PlayerCam.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2)/*new Vector3(0.5f, 0, 0.5f)*/);
             //ray.origin = PlayerCam.transform.position;
             LazerBeam.SetPosition(0, Vector3.zero);
-            Invoke("LazerOff", 0.2f);
-            Invoke("Reload", 2.5f);
+            Invoke(nameof(LazerOff), 0.2f);
+            Invoke(nameof(Reload), 2.5f);
             reloaded = false;
 
             if (Physics.Raycast(ray, out RaycastHit hit))
